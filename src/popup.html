@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nifty</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="head">
+        <img class="logo" src="../icons/icon48.png" alt="" width="34" height="34" />
+        <div class="identity">
+          <div class="name">Nifty</div>
+          <div class="sub"><span id="version">v0.1.19</span></div>
+        </div>
+        <div class="status" id="status" data-state="off" aria-live="polite" aria-label="Nifty is not connected. Open the Nifty desktop app.">
+          <span class="dot" aria-hidden="true"></span>
+          <svg class="alert" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M7.1 2.5 1.4 12.4A1.6 1.6 0 0 0 2.8 14.8h10.4a1.6 1.6 0 0 0 1.4-2.4L8.9 2.5a1.1 1.1 0 0 0-1.8 0Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+            <path d="M8 6.1v3.3M8 11.6h.01" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          <span id="statusText">Open the Nifty desktop app</span>
+        </div>
+      </header>
+
+      <main class="rows">
+        <section class="row">
+          <div class="copy">
+            <label for="monitorDownloads" data-i18n="popup.downloads">Download monitoring</label>
+            <p data-i18n="popup.downloadsDesc">Hand download links to Nifty.</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="monitorDownloads" role="switch" />
+            <span class="track" aria-hidden="true"><span class="knob"></span></span>
+          </label>
+        </section>
+
+        <section class="row">
+          <div class="copy">
+            <label for="monitorVideos" data-i18n="popup.videos">Video monitoring</label>
+            <p data-i18n="popup.videosDesc">Show video badges on the page</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="monitorVideos" role="switch" />
+            <span class="track" aria-hidden="true"><span class="knob"></span></span>
+          </label>
+        </section>
+
+        <section class="row links-row">
+          <div class="links">
+            <a class="icon-only" href="https://nifty.ruoxie.com/" target="_blank" rel="noreferrer noopener" aria-label="Website" data-i18n-aria-label="popup.website">
+              <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 7.4 8 2.6l5.5 4.8V13a.8.8 0 0 1-.8.8h-3V9.6H6.3v4.2h-3a.8.8 0 0 1-.8-.8Z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="icon-only" href="https://github.com/xhat/nifty" target="_blank" rel="noreferrer noopener" aria-label="GitHub">
+              <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1a7 7 0 0 0-2.2 13.6c.35.07.48-.15.48-.34v-1.2c-1.95.42-2.36-.94-2.36-.94-.32-.81-.78-1.03-.78-1.03-.64-.44.05-.43.05-.43.7.05 1.08.72 1.08.72.63 1.08 1.65.77 2.05.59.06-.46.25-.77.45-.95-1.56-.18-3.2-.78-3.2-3.47 0-.77.27-1.4.72-1.89-.07-.18-.31-.9.07-1.87 0 0 .59-.19 1.93.72a6.7 6.7 0 0 1 3.5 0c1.34-.91 1.93-.72 1.93-.72.38.97.14 1.69.07 1.87.45.49.72 1.12.72 1.89 0 2.7-1.65 3.29-3.22 3.46.25.22.48.65.48 1.31v1.95c0 .19.13.41.49.34A7 7 0 0 0 8 1Z" fill="currentColor"/></svg>
+            </a>
+            <div class="language-control icon-only">
+              <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.25"><circle cx="8" cy="8" r="5.8"/><path d="M2.4 8h11.2M8 2.2c1.55 1.55 2.33 3.48 2.33 5.8S9.55 12.23 8 13.8C6.45 12.23 5.67 10.3 5.67 8S6.45 3.75 8 2.2Z"/></g></svg>
+              <select class="select-native" id="language" aria-label="Language" data-i18n-aria-label="popup.language">
+                <option value="en">English</option>
+                <option value="zh-CN">简体中文</option>
+                <option value="zh-TW">繁體中文</option>
+                <option value="ja">日本語</option>
+                <option value="ko">한국어</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+                <option value="es">Español</option>
+                <option value="pt-BR">Português (Brasil)</option>
+                <option value="ru">Русский</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+    <script src="lib/i18n.js"></script>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

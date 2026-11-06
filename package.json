@@ -1,0 +1,10 @@
+{
+  "name": "nifty-extension",
+  "private": true,
+  "type": "module",
+  "version": "0.1.19",
+  "description": "Nifty Download Manager Chrome extension",
+  "scripts": {
+    "test": "node --test test/"
+  }
+}

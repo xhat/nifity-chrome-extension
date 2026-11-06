@@ -1,0 +1,59 @@
+{
+  "manifest_version": 3,
+  "name": "Nifty Download Manager",
+  "short_name": "Nifty",
+  "version": "0.1.19",
+  "description": "Send Chrome downloads and video links to Nifty, a fast native download manager for macOS.",
+  "homepage_url": "https://nifty.ruoxie.com/",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAizr2kz5WiypDFHmj8gtEmVH8Lngu1yScEEVO5Ck6Zi08w1K/nOiJbfZAsXxZUX6bbzNRfxg79U5vxGJZYvzCHCXG6/sjo4E1ssPRAAP0gsIQvRS34IF15qEiFCL7qZRa5y4K5K56JF+j4VRsE6MTCFUBcqhF3NAwTCbumvX+BfvQEFTokDr8pNv7R0hLPmwCoZzzciJXcBJnUkAsa7nc8Tw1qfLdIQjGMKG+8zyenxoHeTWtLrYKQbAnoeYwuWqMH7GOnuI+NnrXmEx3IgzfKrcJQBGZ31dYCIzkHqrnU1GHDgiNHL4jhlT9z/5bN3C/PneLVHscKS9sckyySUhyWQIDAQAB",
+  "minimum_chrome_version": "129",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Nifty",
+    "default_popup": "src/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "downloads",
+    "cookies",
+    "storage",
+    "webRequest",
+    "webNavigation",
+    "tabs",
+    "alarms",
+    "system.cpu",
+    "system.memory"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/lib/i18n.js",
+        "src/lib/x-media.js",
+        "src/content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

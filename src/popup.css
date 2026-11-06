@@ -1,0 +1,307 @@
+:root {
+  color-scheme: light dark;
+  --background: #ffffff;
+  --foreground: #09090b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --primary: #18181b;
+  --primary-foreground: #fafafa;
+  --ring: #a1a1aa;
+  --knob: #ffffff;
+  --success: #16a34a;
+  --error: #dc2626;
+  --radius: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #18181b;
+    --foreground: #fafafa;
+    --muted: #27272a;
+    --muted-foreground: #a1a1aa;
+    --border: #27272a;
+    --input: #3f3f46;
+    --primary: #fafafa;
+    --primary-foreground: #09090b;
+    --ring: #52525b;
+    --knob: #fafafa;
+    --success: #4ade80;
+    --error: #f87171;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* A settings popup, not a document: one cursor everywhere, no text I-beam. */
+html,
+body,
+body * {
+  cursor: default !important;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+body {
+  width: 340px;
+  background: var(--background);
+  color: var(--foreground);
+  font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.identity {
+  min-width: 0;
+  flex: 1;
+}
+
+.name {
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.sub {
+  margin-top: 2px;
+  color: var(--muted-foreground);
+  font-size: 10.5px;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  flex: 0 0 auto;
+  min-height: 16px;
+  color: var(--muted-foreground);
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.status .dot {
+  display: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  background: var(--success);
+}
+
+.status .alert {
+  display: none;
+  width: 12px;
+  height: 12px;
+  flex: 0 0 auto;
+}
+
+.status[data-state="on"] .dot {
+  display: block;
+}
+
+.status[data-state="on"] #statusText {
+  display: none;
+}
+
+.status[data-state="off"] {
+  color: var(--error);
+}
+
+.status[data-state="off"] .alert {
+  display: block;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.12s ease;
+}
+
+.row:hover {
+  background: color-mix(in srgb, var(--muted) 52%, transparent);
+}
+
+.copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.copy label,
+.row-label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.row-label {
+  cursor: default;
+}
+
+.links-row {
+  justify-content: center;
+  gap: 8px;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+
+/* Three bare icon actions: no border, no visible label. */
+.icon-only {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 27px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted-foreground);
+  text-decoration: none;
+  transition: color .12s ease, background-color .12s ease;
+}
+
+.icon-only:hover {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+.icon-only:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+
+.icon-only .icon {
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.language-control {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+/* The native select is the click target and the options popup, but invisible:
+   the visible face is sized by the currently selected language only. */
+.select-native {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.copy p {
+  margin: 3px 0 0;
+  color: var(--muted-foreground);
+  font-size: 10.5px;
+  line-height: 1.4;
+}
+
+.switch {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+
+.switch input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.track {
+  display: block;
+  width: 40px;
+  height: 22px;
+  padding: 2px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--input);
+  transition: background-color 0.14s ease;
+}
+
+.knob {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--knob);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+  transition: transform 0.14s ease, background-color 0.14s ease;
+}
+
+.switch input:checked + .track {
+  background: var(--primary);
+}
+
+.switch input:checked + .track .knob {
+  background: var(--primary-foreground);
+  transform: translateX(18px);
+}
+
+.switch input:focus-visible + .track {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
